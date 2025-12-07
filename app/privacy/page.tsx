@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Github } from "lucide-react";
+import { Footer } from "@/components/footer";
 
 export default function PrivacyPage() {
   return (
@@ -215,16 +216,7 @@ export default function PrivacyPage() {
         </Card>
       </main>
 
-      <footer className="border-t bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm mt-auto">
-        <div className="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          <Link
-            href="/privacy"
-            className="hover:text-foreground transition-colors"
-          >
-            Privacy Policy & About
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

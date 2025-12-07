@@ -55,6 +55,17 @@ export default function Home() {
             </Button>
           </Link>
         </div>
+        <div className="text-sm text-muted-foreground text-center sm:text-right mt-4">
+          Made by{" "}
+          <a
+            href="https://sandeepshetty.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold transition-colors underline text-primary/75 hover:text-primary/45 "
+          >
+            Sandy
+          </a>
+        </div>
       </main>
 
       <Footer />

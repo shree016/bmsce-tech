@@ -165,7 +165,7 @@ export default function QuestionPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex flex-col">
       <nav className="border-b bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto px-4 py-4 max-sm:py-3 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link href="/" className="flex items-center">
             <Image src="/logo.svg" alt="BMSCE.tech" width={100} height={100} />
           </Link>
@@ -185,7 +185,7 @@ export default function QuestionPage() {
         </div>
       </nav>
 
-      <main className="flex-1 max-w-2xl mx-auto px-4 py-12 w-full">
+      <main className="flex-1 max-w-2xl mx-auto px-4 py-12 max-sm:py-4 w-full">
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl">{question.question}</CardTitle>
@@ -359,6 +359,17 @@ export default function QuestionPage() {
             )}
           </CardContent>
         </Card>
+        <div className="text-sm text-muted-foreground text-center sm:text-right mt-4 md:mr-2">
+          Made by{" "}
+          <a
+            href="https://sandeepshetty.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold transition-colors underline text-primary/75 hover:text-primary/45 "
+          >
+            Sandy
+          </a>
+        </div>
       </main>
       <Footer />
     </div>

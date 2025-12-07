@@ -94,7 +94,7 @@ export function StudentSelector({
             </span>
           ) : (
             <span className="text-muted-foreground text-left">
-              {required ? "Select your name..." : "Select your name (optional)"}
+              {required ? "Select your name..." : "Select your name..."}
             </span>
           )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -108,7 +108,7 @@ export function StudentSelector({
       >
         <Command shouldFilter={false}>
           <CommandInput
-            placeholder="Search student..."
+            placeholder="Search your name..."
             value={search}
             onValueChange={setSearch}
           />
