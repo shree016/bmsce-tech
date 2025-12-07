@@ -22,7 +22,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { QuestionType, Audience } from "@/lib/types";
-import { Copy, Check, Github } from "lucide-react";
+import { Copy, Check, Github, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { Footer } from "@/components/footer";
 
@@ -96,6 +96,12 @@ export default function Home() {
       </nav>
 
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 py-8">
+        <Link href="/" className="inline-block mb-4">
+          <Button variant="ghost">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go Back
+          </Button>
+        </Link>
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl">Create Question</CardTitle>

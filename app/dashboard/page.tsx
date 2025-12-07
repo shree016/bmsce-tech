@@ -56,10 +56,10 @@ export default function DashboardPage() {
   const exportToCSV = () => {
     if (!selectedQuestion) return;
 
-    const headers = ["Name", "Roll No", "Answer", "Submitted At"];
+    const headers = ["Name", "USN", "Answer", "Submitted At"];
     const rows = responses.map((r) => [
       r.student?.name || r.name || "Anonymous",
-      r.student?.rollNo || (r.name ? "-" : "N/A"),
+      r.student?.usn || (r.name ? "-" : "N/A"),
       r.answer,
       new Date(r.submittedAt).toLocaleString(),
     ]);
@@ -90,10 +90,9 @@ export default function DashboardPage() {
     return `${questionResponses.length} responses`;
   };
 
-  const copyQuestionLink = (id: string) => {
+  const openQuestionLink = (id: string) => {
     const link = `${window.location.origin}/q/${id}`;
-    navigator.clipboard.writeText(link);
-    toast.success("Link copied to clipboard!");
+    window.open(link, "_blank");
   };
 
   return (
@@ -120,7 +119,15 @@ export default function DashboardPage() {
       <main className="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
         {!selectedQuestion ? (
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold mb-4">Your Questions</h2>
+            <div className="flex items-center justify-start gap-4 items-center mb-4">
+              <Link href="/">
+                <Button variant="outline">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Go Back
+                </Button>
+              </Link>
+              <h2 className="text-2xl font-semibold">Your Questions</h2>
+            </div>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-12 gap-4">
                 <Spinner size="lg" />
@@ -167,7 +174,7 @@ export default function DashboardPage() {
                             <span className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">
                               {q.audience === "all"
                                 ? "All Students"
-                                : "CR Only"}
+                                : "Only for MCA 1st yr Sec B"}
                             </span>
                             {q.isAnonymous && (
                               <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded text-blue-700 dark:text-blue-300">
@@ -181,8 +188,9 @@ export default function DashboardPage() {
                           size="sm"
                           onClick={(e) => {
                             e.stopPropagation();
-                            copyQuestionLink(q.id);
+                            openQuestionLink(q.id);
                           }}
+                          title="Open question in new tab"
                         >
                           <ExternalLink className="h-4 w-4" />
                         </Button>
@@ -252,7 +260,7 @@ export default function DashboardPage() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Name</TableHead>
-                          <TableHead>Roll No</TableHead>
+                          <TableHead>USN</TableHead>
                           <TableHead>Answer</TableHead>
                           <TableHead>Submitted At</TableHead>
                         </TableRow>
@@ -266,7 +274,7 @@ export default function DashboardPage() {
                                 "Anonymous"}
                             </TableCell>
                             <TableCell className="text-muted-foreground">
-                              {response.student?.rollNo ||
+                              {response.student?.usn ||
                                 (response.name ? "-" : "N/A")}
                             </TableCell>
                             <TableCell>

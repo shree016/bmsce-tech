@@ -40,10 +40,12 @@ model Response {
 model Student {
   id        String     @id @default(cuid())
   name      String
-  rollNo    String     @unique
+  usn       String     @unique
+  section   String
   responses Response[]
   createdAt DateTime   @default(now())
 
   @@index([name])
-  @@index([rollNo])
+  @@index([usn])
+  @@index([section])
 }

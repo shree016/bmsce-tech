@@ -4,7 +4,8 @@ export type Audience = "all" | "cr-only";
 export interface Student {
   id: string;
   name: string;
-  rollNo: string;
+  usn: string;
+  section: string;
   createdAt: Date;
 }
 

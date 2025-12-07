@@ -21,7 +21,8 @@ import {
 interface Student {
   id: string;
   name: string;
-  rollNo: string;
+  usn: string;
+  section: string;
 }
 
 interface StudentSelectorProps {
@@ -88,7 +89,7 @@ export function StudentSelector({
                 {selectedStudent.name}
               </span>
               <span className="text-xs text-muted-foreground">
-                {selectedStudent.rollNo}
+                {selectedStudent.usn}
               </span>
             </span>
           ) : (
@@ -134,7 +135,7 @@ export function StudentSelector({
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between flex-1 gap-1 min-w-0">
                     <span className="truncate">{student.name}</span>
                     <span className="text-xs text-muted-foreground shrink-0">
-                      {student.rollNo}
+                      {student.usn}
                     </span>
                   </div>
                 </CommandItem>

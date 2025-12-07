@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
         ? {
             OR: [
               { name: { contains: search, mode: "insensitive" } },
-              { rollNo: { contains: search, mode: "insensitive" } },
+              { usn: { contains: search, mode: "insensitive" } },
             ],
           }
         : {},
