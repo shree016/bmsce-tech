@@ -19,6 +19,28 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  openGraph: {
+    title: "BMSCE.tech",
+    description: "An Open-Source Community for BMSCE Student",
+    url: "https://bmsce.tech",
+    siteName: "BMSCE.tech",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "An Open-Source Community for BMSCE Student",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BMSCE.tech",
+    description: "An Open-Source Community for BMSCE Student",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
