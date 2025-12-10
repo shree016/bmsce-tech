@@ -14,7 +14,6 @@ import { Footer } from "@/components/footer";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function QuestionPage() {
-  // ----- hooks (always declared, in fixed order) -----
   const params = useParams();
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -26,19 +25,13 @@ export default function QuestionPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  // ----- redirect unauthenticated users (in effect, not during render) -----
   useEffect(() => {
     if (status === "unauthenticated") {
-      // redirect to login with callback after session check completes
       const callbackUrl = encodeURIComponent(window.location.href);
       window.location.href = `/login?callbackUrl=${callbackUrl}`;
     }
   }, [status]);
 
-  // ----- block non-bmsce users client-side (no hooks used here) -----
-  // We'll render a friendly message if email exists and is not bmsce.
-
-  // ----- fetch question (hook declared above; effect runs unconditionally) -----
   useEffect(() => {
     let mounted = true;
     async function fetchQuestion() {
@@ -61,7 +54,6 @@ export default function QuestionPage() {
     };
   }, [params.id]);
 
-  // ----- handle submit -----
   const handleSubmit = async (selectedAnswer?: string, anonymous = false) => {
     const finalAnswer = selectedAnswer || answer;
     if (!finalAnswer) {
@@ -90,8 +82,6 @@ export default function QuestionPage() {
     }
   };
 
-  // ----- render flows -----
-  // while session is being checked, show loader
   if (status === "loading" || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -100,11 +90,8 @@ export default function QuestionPage() {
     );
   }
 
-  // note: if status === "unauthenticated", the useEffect above will run redirect,
-  // so we can just render null here to avoid flicker while redirecting.
   if (status === "unauthenticated") return null;
 
-  // If logged in but not a BMSCE email:
   if (session && !userEmail?.endsWith("@bmsce.ac.in")) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -115,7 +102,6 @@ export default function QuestionPage() {
     );
   }
 
-  // question not found
   if (!question) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -124,7 +110,6 @@ export default function QuestionPage() {
     );
   }
 
-  // submitted view
   if (submitted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -139,7 +124,6 @@ export default function QuestionPage() {
     );
   }
 
-  // main UI
   return (
     <div className="min-h-screen flex flex-col">
       <nav className="border-b bg-white/50 backdrop-blur-sm">

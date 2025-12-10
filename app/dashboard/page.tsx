@@ -51,7 +51,6 @@ export default function DashboardPage() {
     setResponses(question.responses || []);
   };
 
-  // CSV EXPORT — Only Email, Answer, Submitted At
   const exportToCSV = () => {
     if (!selectedQuestion) return;
 
@@ -94,7 +93,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex flex-col">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex flex-col">
       <nav className="border-b bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between">
           <Link href="/" className="flex items-center">
@@ -117,7 +116,9 @@ export default function DashboardPage() {
       <main className="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
         {!selectedQuestion ? (
           <div className="space-y-4">
-            <div className="flex items-center gap-4 mb-4">
+
+            {/* FIXED MERGE CONFLICT — chose remote + your version combined */}
+            <div className="flex items-center justify-start gap-4 mb-4">
               <Link href="/">
                 <Button variant="outline">
                   <ArrowLeft className="w-4 h-4 mr-2" />
@@ -191,7 +192,6 @@ export default function DashboardPage() {
             )}
           </div>
         ) : (
-          // ---------------- RESPONSE TABLE ----------------
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <Button variant="ghost" onClick={() => setSelectedQuestion(null)}>

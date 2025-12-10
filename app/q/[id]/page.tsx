@@ -43,7 +43,6 @@ export default function QuestionPage() {
       try {
         setLoadingQuestion(true);
 
-        // Fix: Ensure ID is correctly extracted
         const id =
           typeof params.id === "string"
             ? params.id
@@ -57,7 +56,6 @@ export default function QuestionPage() {
         }
 
         const r = await fetch(`/api/questions/${id}`);
-
         if (!active) return;
 
         setQuestion(r.ok ? await r.json() : null);
@@ -81,7 +79,6 @@ export default function QuestionPage() {
       return;
     }
 
-    // must be BMSCE email
     if (!userEmail?.endsWith("@bmsce.ac.in")) {
       toast.error("Only BMSCE email can submit responses.");
       return;
@@ -110,7 +107,7 @@ export default function QuestionPage() {
     }
   };
 
-  // show loading
+  // loading screen
   if (status === "loading" || loadingQuestion) {
     return (
       <div className="min-h-screen flex items-center justify-center">
