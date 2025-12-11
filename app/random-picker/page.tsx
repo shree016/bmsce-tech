@@ -34,7 +34,6 @@ export default function RandomPickerPage() {
   const [numberOfPicks, setNumberOfPicks] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [picking, setPicking] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   // Load from localStorage on mount
@@ -206,22 +205,6 @@ export default function RandomPickerPage() {
       setAlreadyPicked(newAlreadyPicked);
       toast.success(`${draggedStudent.name} removed from picked list`);
     }
-  };
-
-  const copyResults = () => {
-    if (pickedStudents.length === 0) {
-      toast.error("No students picked yet");
-      return;
-    }
-
-    const resultText = pickedStudents
-      .map((s, i) => `${i + 1}. ${s.name} (${s.usn})`)
-      .join("\n");
-
-    navigator.clipboard.writeText(resultText);
-    setCopied(true);
-    toast.success("Results copied to clipboard!");
-    setTimeout(() => setCopied(false), 2000);
   };
 
   const availableCount = students.length - alreadyPicked.size;

@@ -19,3 +19,11 @@ export interface Response {
   email: string;          // ✅ ALWAYS present (no anonymous)
   submittedAt: Date;
 }
+
+export interface Student {
+  id: string;
+  name: string;
+  usn: string;
+  section: string;
+  email: string;
+}
