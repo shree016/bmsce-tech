@@ -76,22 +76,13 @@ const studentInfo = [
 async function main() {
   console.log("🌱 Starting seed...");
 
-  // Create or get students (upsert to avoid duplicates)
-  const students = await Promise.all(
-    studentInfo.map(async (student) => {
-      return prisma.student.upsert({
-        where: { usn: student.usn },
-        update: {},
-        create: {
-          name: student.name,
-          usn: student.usn,
-          section: student.section,
-        },
-      });
-    })
-  );
+  // Generate email addresses for students
+  const students = studentInfo.map((student) => ({
+    ...student,
+    email: `${student.usn.toLowerCase()}@bmsce.ac.in`,
+  }));
 
-  console.log(`✅ Ensured ${students.length} students exist`);
+  console.log(`✅ Prepared ${students.length} student records`);
 
   // Create some demo questions
   const question1 = await prisma.question.create({
@@ -127,15 +118,15 @@ async function main() {
   // Create some demo responses
   await prisma.response.createMany({
     data: [
-      { questionId: question1.id, answer: "Yes", studentId: students[0].id },
-      { questionId: question1.id, answer: "Yes", studentId: students[1].id },
-      { questionId: question1.id, answer: "No", studentId: students[2].id },
-      { questionId: question2.id, answer: "Yes", studentId: students[3].id },
-      { questionId: question2.id, answer: "No", studentId: students[4].id },
+      { questionId: question1.id, answer: "Yes", email: students[0].email },
+      { questionId: question1.id, answer: "Yes", email: students[1].email },
+      { questionId: question1.id, answer: "No", email: students[2].email },
+      { questionId: question2.id, answer: "Yes", email: students[3].email },
+      { questionId: question2.id, answer: "No", email: students[4].email },
       {
         questionId: question3.id,
         answer: "Machine Learning and AI fundamentals",
-        studentId: students[5].id,
+        email: students[5].email,
       },
     ],
   });
