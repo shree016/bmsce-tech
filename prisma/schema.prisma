@@ -38,3 +38,17 @@ model Response {
   @@index([questionId])
   @@index([submittedAt])
 }
+
+/* ---------------------------
+   STUDENT MODEL
+---------------------------- */
+model Student {
+  id      String @id @default(cuid())
+  name    String
+  usn     String @unique
+  section String
+  email   String @unique
+
+  @@index([section])
+  @@index([usn])
+}

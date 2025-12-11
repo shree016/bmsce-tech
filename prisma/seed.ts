@@ -84,6 +84,14 @@ async function main() {
 
   console.log(`✅ Prepared ${students.length} student records`);
 
+  // Create students in database
+  await prisma.student.createMany({
+    data: students,
+    skipDuplicates: true,
+  });
+
+  console.log(`✅ Created ${students.length} students`);
+
   // Create some demo questions
   const question1 = await prisma.question.create({
     data: {
