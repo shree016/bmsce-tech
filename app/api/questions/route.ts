@@ -1,17 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-<<<<<<< HEAD
-=======
 import Pusher from "pusher";
 
 const pusher = new Pusher({
-  appId: process.env.PUSHER_APP_ID!,     
-  key: process.env.PUSHER_KEY!,           
-  secret: process.env.PUSHER_SECRET!,     
-  cluster: process.env.PUSHER_CLUSTER!,   
+  appId: process.env.PUSHER_APP_ID!,
+  key: process.env.PUSHER_KEY!,
+  secret: process.env.PUSHER_SECRET!,
+  cluster: process.env.PUSHER_CLUSTER!,
   useTLS: true,
 });
->>>>>>> 71dc632 (Added Livewall)
 
 export async function GET() {
   try {
@@ -48,12 +45,9 @@ export async function POST(request: NextRequest) {
       },
     });
 
-<<<<<<< HEAD
-=======
     // 🔥 REALTIME EVENT
     await pusher.trigger("questions", "new-question", question);
 
->>>>>>> 71dc632 (Added Livewall)
     return NextResponse.json(question);
   } catch (error) {
     console.error("Error creating question:", error);

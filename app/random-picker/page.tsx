@@ -38,14 +38,31 @@ export default function RandomPickerPage() {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedPickedIds = localStorage.getItem("randomPicker_pickedStudents");
-    if (savedPickedIds) {
-      try {
-        const ids = JSON.parse(savedPickedIds) as string[];
-        setAlreadyPicked(new Set(ids));
-      } catch (error) {
-        console.error("Error loading saved picks:", error);
+    try {
+      const savedPickedIds = localStorage.getItem(
+        "randomPicker_pickedStudents"
+      );
+      if (savedPickedIds) {
+        // Validate JSON before parsing
+        if (
+          savedPickedIds.trim().startsWith("[") ||
+          savedPickedIds.trim().startsWith("{")
+        ) {
+          const ids = JSON.parse(savedPickedIds) as string[];
+          if (Array.isArray(ids)) {
+            setAlreadyPicked(new Set(ids));
+          } else {
+            throw new Error("Invalid data format");
+          }
+        } else {
+          throw new Error("Invalid JSON string");
+        }
       }
+    } catch (error) {
+      console.error("Error loading saved picks:", error);
+      // Clear corrupted data
+      localStorage.removeItem("randomPicker_pickedStudents");
+      toast.error("Corrupted data cleared. Please refresh the page.");
     }
   }, []);
 
@@ -63,19 +80,33 @@ export default function RandomPickerPage() {
           setStudents(sectionBStudents);
 
           // Restore picked students from localStorage after students are loaded
-          const savedPickedIds = localStorage.getItem(
-            "randomPicker_pickedStudents"
-          );
-          if (savedPickedIds) {
-            try {
-              const ids = JSON.parse(savedPickedIds) as string[];
-              const restoredStudents = sectionBStudents.filter((s: Student) =>
-                ids.includes(s.id)
-              );
-              setPickedStudents(restoredStudents);
-            } catch (error) {
-              console.error("Error restoring picked students:", error);
+          try {
+            const savedPickedIds = localStorage.getItem(
+              "randomPicker_pickedStudents"
+            );
+            if (savedPickedIds) {
+              // Validate JSON before parsing
+              if (
+                savedPickedIds.trim().startsWith("[") ||
+                savedPickedIds.trim().startsWith("{")
+              ) {
+                const ids = JSON.parse(savedPickedIds) as string[];
+                if (Array.isArray(ids)) {
+                  const restoredStudents = sectionBStudents.filter(
+                    (s: Student) => ids.includes(s.id)
+                  );
+                  setPickedStudents(restoredStudents);
+                } else {
+                  throw new Error("Invalid data format");
+                }
+              } else {
+                throw new Error("Invalid JSON string");
+              }
             }
+          } catch (error) {
+            console.error("Error restoring picked students:", error);
+            // Clear corrupted data
+            localStorage.removeItem("randomPicker_pickedStudents");
           }
         }
       } catch (error) {

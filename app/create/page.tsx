@@ -33,10 +33,7 @@ export default function Home() {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [generatedLink, setGeneratedLink] = useState("");
-<<<<<<< HEAD
-=======
   const [generatedLiveLink, setGeneratedLiveLink] = useState("");
->>>>>>> 71dc632 (Added Livewall)
   const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,13 +56,9 @@ export default function Home() {
 
       const newQuestion = await response.json();
       const link = `${window.location.origin}/q/${newQuestion.id}`;
-<<<<<<< HEAD
-      setGeneratedLink(link);
-=======
       const livelink = `${window.location.origin}/live/${newQuestion.id}`;
       setGeneratedLink(link);
       setGeneratedLiveLink(livelink);
->>>>>>> 71dc632 (Added Livewall)
       setShowDialog(true);
 
       // Reset form
